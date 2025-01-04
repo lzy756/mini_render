@@ -56,7 +56,6 @@ async def handle(bot, event):
                         event,
                         f"Command failed with return code {result.returncode}")
                 else:
-                    await bot.send(event,MessageSegment.at(event.get_user_id()))
                     # video_mes = MessageSegment.video(
                     #     file=
                     #     f"file:///{os.path.join(os.getcwd(),'tmp',os.path.basename(file_pos).replace('.wowsreplay','.mp4'))}"
@@ -65,6 +64,7 @@ async def handle(bot, event):
                     file_path = f"file:///{os.path.join(os.getcwd(),'tmp',os.path.basename(file_pos).replace('.wowsreplay','.mp4'))}"  # 替换为实际的文件路径
                     file_name = os.path.basename(file_pos).replace('.wowsreplay', '.mp4')  # 文件名
                     if event.message_type == "group":
+                        await bot.send(event,MessageSegment.at(event.get_user_id()))
                         group_id = event.group_id
                         await bot.call_api("upload_group_file",
                                            group_id=group_id,
