@@ -1,5 +1,11 @@
 # mini_render
 
+## Introduction
+
+1. install Minimap_Renderer first.
+2. use the following section to start the bot
+3. the records uploaded would be transform into mp4 video.
+
 ## How to start
 
 1. generate project using `nb create` .
