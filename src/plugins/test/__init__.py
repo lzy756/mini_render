@@ -1,10 +1,11 @@
-from nonebot import get_plugin_config, on_command, on_message
+from nonebot import get_plugin_config, on_command, on_message,get_bots,get_driver
 from nonebot.plugin import PluginMetadata
 from nonebot.adapters import Message
 from nonebot.params import CommandArg
 from .config import Config
 from nonebot.adapters.onebot.v11 import Bot, Event, MessageSegment, PrivateMessageEvent, GroupMessageEvent
 import os, shutil, subprocess, time
+import asyncio
 
 __plugin_meta__ = PluginMetadata(
     name="test",
@@ -17,7 +18,21 @@ config = get_plugin_config(Config)
 
 test = on_command("test", priority=5)
 file_get = on_message(priority=5)
+driver = get_driver()
 
+@driver.on_bot_connect
+async def startup_message(bot: Bot):
+    await asyncio.sleep(1)  # 确保 Bot 完全启动
+    # print("1")
+    try:
+        # 发送私聊消息
+        # await bot.send_private_msg(user_id=123456789, message="Bot 已启动！")
+        # print("2")
+
+        # 发送群聊消息
+        await bot.send_group_msg(group_id=635928538, message="CLLL！")
+    except Exception as e:
+        print(f"发送消息失败：{e}")
 
 @test.handle()
 async def handle(bot, event, args: Message = CommandArg()):
